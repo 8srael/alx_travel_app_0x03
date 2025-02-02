@@ -17,5 +17,5 @@ class BookingViewSet(ModelViewSet):
     def perform_create(self, serializer):
         booking = serializer.save()
         email = booking.user.email
-        send_booking_confirmation_email.delay(booking.email, booking)
+        send_booking_confirmation_email.delay(email, booking)
         return booking
