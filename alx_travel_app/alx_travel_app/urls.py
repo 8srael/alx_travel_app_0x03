@@ -27,12 +27,12 @@ schema_view = get_schema_view(
         default_version = "v1",
         description = "API Documentation for ALX TravelApp (Listings and Bookings)",
         public = True,
-        permission_classes = (permissions.AllowAny,),
+        # permission_classes = (permissions.AllowAny,),
     )
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('api/', include('listings.urls')),  #API routes
-    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api/', include('listings.urls')),  #API routes
+    re_path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]

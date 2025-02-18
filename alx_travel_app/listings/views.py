@@ -3,6 +3,8 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Listing, Booking
 from .serializers import ListingSerializer, BookingSerializer
 from .tasks import send_booking_confirmation_email
+from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
 
@@ -15,7 +17,6 @@ class BookingViewSet(ModelViewSet):
     serializer_class = BookingSerializer
 
     def perform_create(self, serializer):
-        booking = serializer.save()
-        email = booking.user.email
-        send_booking_confirmation_email.delay(email, booking)
-        return booking
+        serializer.save() 
+        send_booking_confirmation_email.delay(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)

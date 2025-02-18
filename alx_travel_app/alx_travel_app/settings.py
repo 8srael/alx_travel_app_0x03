@@ -156,13 +156,16 @@ CORS_ALLOW_ORIGINS = []
 #     ],
 # }
 
-# Configure Rabbitmq as broker
-CELERY_BROKER_URL = 'amqp://localhost'
-
-CELERY_RESULT_BACKEND = 'rpc://'
-
+# Configure Rabbitmq/Redis as broker
+CELERY_BROKER_URL = 'amqps://upucvtzh:EVFbJV7rlFeQ16IxvcCg-2vYUl8StD0j@woodpecker.rmq.cloudamqp.com/upucvtzh'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
 
 # Django Email backend configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

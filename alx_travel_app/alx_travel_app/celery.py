@@ -8,8 +8,11 @@ app = Celery('alx_travel_app')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
+if os.name == 'nt':  # Windows
+    app.conf.worker_pool = 'solo'
+
 app.autodiscover_tasks()
 
-@app.task(bind=True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
+# @app.task(bind=True)
+# def debug_task(self):
+#     print(f'Request: {self.request!r}')
